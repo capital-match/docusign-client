@@ -1,0 +1,26 @@
+name: docusign-client
+synopsis: Client bindings for the DocuSign API
+
+library:
+  dependencies:
+    - aeson
+    - base
+    - base64-bytestring
+    - bytestring
+    - data-default
+    - docusign-base
+    - exceptions
+    - http-client
+    - http-client-tls
+    - http-types
+    - servant-client
+    - text
+    - uuid
+  exposed-modules:
+    - DocuSign.Client
+    - DocuSign.Client.Configuration
+    - DocuSign.Client.Types
+    - DocuSign.Client.Types.Conversion
+    - DocuSign.Client.Types.Parsing
+  source-dirs:
+    - src
