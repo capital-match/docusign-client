@@ -1,0 +1,40 @@
+-- This file has been generated from package.yaml by hpack version 0.27.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 8328eed74666f973ff01d9b043478d648fa43fc747e04c9eb562d15c02750c8f
+
+name:           docusign-client
+version:        0.0.0
+synopsis:       Client bindings for the DocuSign API
+license-file:   LICENSE
+build-type:     Simple
+cabal-version:  >= 1.10
+
+library
+  exposed-modules:
+      DocuSign.Client
+      DocuSign.Client.Configuration
+      DocuSign.Client.Types
+      DocuSign.Client.Types.Conversion
+      DocuSign.Client.Types.Parsing
+  other-modules:
+      DocuSign.Client.Authentication
+      Paths_docusign_client
+  hs-source-dirs:
+      src
+  build-depends:
+      aeson
+    , base
+    , base64-bytestring
+    , bytestring
+    , data-default
+    , docusign-base
+    , exceptions
+    , http-client
+    , http-client-tls
+    , http-types
+    , servant-client
+    , text
+    , uuid
+  default-language: Haskell2010
