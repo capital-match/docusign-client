@@ -1,3 +1,4 @@
+{-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
 module DocuSign.Client.Types
@@ -45,6 +46,7 @@ module DocuSign.Client.Types
 import Control.Exception              ( assert )
 import Data.Aeson                     ( FromJSON
                                       , ToJSON )
+import Data.Data                      ( Data )
 import Data.Text                      ( Text )
 import Data.Typeable                  ( Typeable )
 import Data.UUID                      ( UUID )
@@ -73,7 +75,7 @@ mkAccountName :: Text -> AccountName
 mkAccountName = AccountName
 
 newtype DocumentId = DocumentId { unDocumentId :: Integer }
-  deriving (Enum, Eq, FromJSON, Integral, Num, Ord, Read, Real, Show, ToJSON, Typeable)
+  deriving (Data, Enum, Eq, FromJSON, Integral, Num, Ord, Read, Real, Show, ToJSON, Typeable)
 
 mkDocumentId :: Integer -> DocumentId
 mkDocumentId i = assert (i > 0) $ DocumentId i
@@ -85,7 +87,7 @@ mkEmailAddress :: Text -> EmailAddress
 mkEmailAddress = EmailAddress
 
 newtype EnvelopeId = EnvelopeId { unEnvelopeId :: UUID }
-  deriving (Eq, FromJSON, Read, Show, ToJSON, Typeable)
+  deriving (Data, Eq, FromJSON, Read, Show, ToJSON, Typeable)
 
 mkEnvelopeId :: UUID -> EnvelopeId
 mkEnvelopeId = EnvelopeId
