@@ -1,5 +1,5 @@
 name:           docusign-client
-version:        0.0.1
+version:        0.0.2
 synopsis:       Client bindings for the DocuSign API
 description:    DocuSign is an electronic signature technology and digital transaction
                 management. This is the client API.
@@ -34,7 +34,7 @@ library
     , base64-bytestring
     , bytestring
     , data-default
-    , docusign-base
+    , docusign-base-minimal >= 0.0.1
     , exceptions
     , http-client
     , http-client-tls
