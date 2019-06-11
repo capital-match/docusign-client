@@ -32,8 +32,8 @@ import Servant.Client                 ( BaseUrl (..)
                                       , mkClientEnv
                                       , ClientM
                                       , Scheme (..)
-                                      , ServantError
                                       , runClientM )
+import Servant.Client.Core.ClientError ( ClientError )
 
 import qualified Data.ByteString.Base64            as Base64
 import qualified Data.ByteString.Lazy              as BL
@@ -118,7 +118,7 @@ docuSignClient = DocuSignClient
         , D.recipientViewRequestReturnUrl            = Just $ unUri postSigningRedirectionUri
         , D.recipientViewRequestUserName             = Just recipientName }
 
-runClient :: C.Config -> ClientM a -> IO (Either ServantError a)
+runClient :: C.Config -> ClientM a -> IO (Either ClientError a)
 runClient config client = do
     m <- liftIO $ newManager (tlsManagerSettings {managerModifyRequest = addHeaders})
     runClientM client $ mkClientEnv m (baseUrlFromConfig config)
