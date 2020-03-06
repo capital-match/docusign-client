@@ -1,5 +1,5 @@
 name:           docusign-client
-version:        0.0.3
+version:        0.0.4
 synopsis:       Client bindings for the DocuSign API
 description:    DocuSign is an electronic signature technology and digital transaction
                 management. This is the client API.

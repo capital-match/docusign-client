@@ -69,7 +69,7 @@ mkAccountId :: Integer -> AccountId
 mkAccountId i = assert (i > 0) $ AccountId i
 
 newtype AccountName = AccountName { unAccountName :: Text }
-  deriving (Eq, FromJSON, Read, Show, ToJSON, Typeable)
+  deriving (Eq, FromJSON, Read, Show, ToJSON, Typeable, Ord)
 
 mkAccountName :: Text -> AccountName
 mkAccountName = AccountName
@@ -81,37 +81,37 @@ mkDocumentId :: Integer -> DocumentId
 mkDocumentId i = assert (i > 0) $ DocumentId i
 
 newtype EmailAddress = EmailAddress { unEmailAddress :: Text }
-  deriving (Eq, FromJSON, Read, Show, ToJSON, Typeable)
+  deriving (Eq, FromJSON, Read, Show, ToJSON, Typeable, Ord)
 
 mkEmailAddress :: Text -> EmailAddress
 mkEmailAddress = EmailAddress
 
 newtype EnvelopeId = EnvelopeId { unEnvelopeId :: UUID }
-  deriving (Data, Eq, FromJSON, Read, Show, ToJSON, Typeable)
+  deriving (Data, Eq, FromJSON, Read, Show, ToJSON, Typeable, Ord)
 
 mkEnvelopeId :: UUID -> EnvelopeId
 mkEnvelopeId = EnvelopeId
 
 newtype RecipientId = RecipientId { unRecipientId :: Text }
-  deriving (Eq, FromJSON, Read, Show, ToJSON, Typeable)
+  deriving (Eq, FromJSON, Read, Show, ToJSON, Typeable, Ord)
 
 mkRecipientId :: Text -> RecipientId
 mkRecipientId = RecipientId
 
 newtype Uri = Uri { unUri :: Text }
-  deriving (Eq, FromJSON, Read, Show, ToJSON, Typeable)
+  deriving (Eq, FromJSON, Read, Show, ToJSON, Typeable, Ord)
 
 mkUri :: Text -> Uri
 mkUri = Uri
 
 newtype UserId = UserId { unUserId :: Text }
-  deriving (Eq, FromJSON, Read, Show, ToJSON, Typeable)
+  deriving (Eq, FromJSON, Read, Show, ToJSON, Typeable, Ord)
 
 mkUserId :: Text -> UserId
 mkUserId = UserId
 
 newtype UserName = UserName { unUserName :: Text }
-  deriving (Eq, FromJSON, Read, Show, ToJSON, Typeable)
+  deriving (Eq, FromJSON, Read, Show, ToJSON, Typeable, Ord)
 
 mkUserName :: Text -> UserName
 mkUserName = UserName
