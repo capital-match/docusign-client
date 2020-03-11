@@ -62,6 +62,9 @@ data DocuSignClient m = DocuSignClient {
     -- | Fetch a document in its current state, regardless of whether it has
     --   or has not been signed.
   , fetchDocument :: AccountId -> EnvelopeId -> DocumentId -> m PDF
+
+    -- | Generate a signing link for an existing envelope id
+  , generateSigningLink :: AccountId -> EnvelopeId -> Recipient -> PostSigningUri -> m SigningUri
   }
 
 docuSignClient :: DocuSignClient ClientM
@@ -75,12 +78,15 @@ docuSignClient = DocuSignClient
 
   , postDocumentsForRedirectionBasedSigning = \aid ds e r p -> do
       eid <- postDocuments RedirectionBasedSigning aid ds e r
-      url <- generateSigningLink aid eid (recipientClientUserId r) r (RedirectionOptions $ p eid)
+      url <- generateSigningLink' aid eid (recipientClientUserId r) r (RedirectionOptions $ p eid)
       pure (eid, url)
 
   , fetchDocument = \aid eid did ->
       documentsGetDocument (convert aid) (convert eid) (convert did)
         Nothing Nothing Nothing Nothing Nothing Nothing Nothing
+
+  , generateSigningLink = \aid eid r p ->
+      generateSigningLink' aid eid (recipientClientUserId r) r (RedirectionOptions p)
   }
   where
     D.DocuSignClient {..} = D.docuSignClient
@@ -109,7 +115,7 @@ docuSignClient = DocuSignClient
                                                   def { D.envelopeRecipientTabsSignHereTabs = Just [
                                                   def { D.signHereAnchorString = Just a } ] } } ] } }
 
-    generateSigningLink aid eid uid Recipient {..} RedirectionOptions {..} =
+    generateSigningLink' aid eid uid Recipient {..} RedirectionOptions {..} =
       parseM =<< viewsPostEnvelopeRecipientView (convert aid) (convert eid) def
         { D.recipientViewRequestAuthenticationMethod = Just "email"
         , D.recipientViewRequestClientUserId         = Just $ unUserId uid
